@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "edgesync-fieldkit"
+version = "0.1.0"
+description = "Offline-first synchronization for synthetic field inspection teams."
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.8,<3", "fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9", "ruff>=0.6,<1", "httpx>=0.27,<1"]
+
+[project.scripts]
+edgesync = "edgesync.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
