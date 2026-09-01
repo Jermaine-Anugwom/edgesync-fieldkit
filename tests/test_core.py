@@ -31,6 +31,12 @@ def test_conflict_pending():
     assert sync([ev(device="A"), ev(device="B")]).pending[0].status == "conflict"
 
 
+def test_same_device_same_sequence_different_payload_conflicts():
+    result = sync([ev(device="A", payload={"value": 1}), ev(device="A", payload={"value": 2})])
+    assert result.conflicts == ("R",)
+    assert len(result.applied) == 1 and result.pending[0].status == "conflict"
+
+
 def test_id_stable():
     assert ev().event_id == ev().event_id
 

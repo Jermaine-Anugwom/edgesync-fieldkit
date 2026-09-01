@@ -9,6 +9,7 @@ htmlcov/
 node_modules/
 web/.next/
 web/out/
+web/*.tsbuildinfo
 dist/
 *.egg-info/
 .DS_Store

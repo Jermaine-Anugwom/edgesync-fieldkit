@@ -45,7 +45,11 @@ def sync(events: list[Event], seen: set[str] | None = None, online: bool = True)
             pending.append(event)
             continue
         prior = latest.get(event.record_id)
-        if prior and prior.sequence == event.sequence and prior.device_id != event.device_id:
+        if (
+            prior
+            and prior.sequence == event.sequence
+            and (prior.device_id != event.device_id or prior.payload != event.payload)
+        ):
             conflicts.append(event.record_id)
             pending.append(replace(event, status="conflict"))
             continue

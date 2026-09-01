@@ -21,7 +21,7 @@ Field work must continue through unreliable connectivity without duplicate actio
 
 ## Success measure
 
-A local event journal, deterministic fault injection, idempotent replay, conflict policy, and visible recovery states.
+Offline queuing, content-addressed event IDs, seen-event suppression, same-sequence conflict handling, and visible recovery states.
 
 ## Handoff
 

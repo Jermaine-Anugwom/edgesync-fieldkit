@@ -15,7 +15,7 @@ Field work must continue through unreliable connectivity without duplicate actio
 
 ## The proof
 
-A local event journal, deterministic fault injection, idempotent replay, conflict policy, and visible recovery states.
+Deterministic offline queuing, content-addressed event IDs, suppression of previously seen events, and conflict detection for divergent same-sequence edits within a synchronization batch.
 
 ## Why this is forward deployed
 
@@ -28,12 +28,12 @@ remains useful when the optional model layer is unavailable.
 
 ```mermaid
 flowchart LR
-  A[Field device] --> B[Signed local queue]
+  A[Field device] --> B[Local pending queue]
   B --> C{Network state}
   C -->|available| D[Idempotent replay]
   C -->|offline| B
   D --> E{Sequence conflict?}
-  E -->|no| F[Central ledger]
+  E -->|no| F[Applied result]
   E -->|yes| G[Operator resolution]
   G --> F
 ```
@@ -43,14 +43,14 @@ flowchart LR
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
+python -m pip install -c constraints.txt -e '.[dev]'
 pytest -q
 edgesync
 ```
 
 No API key or network connection is required.
 
-Run the complete local stack with `docker compose up --build`; the interface is available on port 3002 and the API on port 8002.
+Run the interface and API demonstrations side by side with `docker compose up --build`; the interface is available on port 3002 and the API on port 8002. The visual fixture is intentionally static and does not claim to be API-produced evidence.
 
 ## Evaluation and limitations
 
