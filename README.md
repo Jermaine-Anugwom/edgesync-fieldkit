@@ -9,6 +9,19 @@
 
 [Open the live demonstration](https://jermaine-anugwom.github.io/edgesync-fieldkit/)
 
+## Run it locally
+
+Requires Git and Docker with Compose v2. Initial setup downloads dependencies and images; no model key is needed.
+
+```bash
+git clone https://github.com/Jermaine-Anugwom/edgesync-fieldkit.git
+cd edgesync-fieldkit
+docker compose up --build
+```
+
+Open the [interface](http://127.0.0.1:3002) or [API documentation](http://127.0.0.1:8002/docs).
+The interface replays a static synthetic fixture alongside the API; it is not API-produced evidence.
+
 ## The operational problem
 
 Field work must continue through unreliable connectivity without duplicate actions, lost evidence, or silent conflicts.
@@ -38,7 +51,9 @@ flowchart LR
   G --> F
 ```
 
-## Quickstart
+## Python-only setup
+
+From the cloned repository, with Python 3.12 installed:
 
 ```bash
 python3.12 -m venv .venv
@@ -48,9 +63,7 @@ pytest -q
 edgesync
 ```
 
-No API key or network connection is required.
-
-Run the interface and API demonstrations side by side with `docker compose up --build`; the interface is available on port 3002 and the API on port 8002. The visual fixture is intentionally static and does not claim to be API-produced evidence.
+The API uses local synthetic data. Dependency installation requires a network connection; running the demonstration needs no model key.
 
 ## Evaluation and limitations
 
